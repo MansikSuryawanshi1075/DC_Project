@@ -1,0 +1,197 @@
+
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetSim Learn</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>NetSim Learn</h1>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#simulation">Simulation</a>
+            <a href="#learn">Learn</a>
+            <a href="#comparison">Comparison</a>
+        </nav>
+        <button id="theme-toggle" class="theme-btn">🌙 Dark Mode</button>
+
+
+    </header>
+
+    <main>
+        <section id="home" class="section">
+            <h2>Welcome to NetSim Learn</h2>
+            <p>Explore and simulate different network topologies in an interactive way. Learn about how data communicates through various structures like Bus, Star, Ring, Mesh, and Hybrid. These topologies define how devices are connected in a network and how data is transferred between them.</p>
+        </section>
+
+        <section id="simulation" class="section">
+            <h2>Network Topology Simulation</h2>
+            <div class="controls">
+                <label for="topology">Select Topology:</label>
+                <select id="topology">
+                    <option value="bus">Bus</option>
+                    <option value="star">Star</option>
+                    <option value="ring">Ring</option>
+                    <option value="mesh">Mesh</option>
+                    <option value="hybrid">Hybrid</option>
+                </select>
+
+                <label for="nodes">Number of Nodes (3-10):</label>
+                <input type="number" id="nodes" min="3" max="10" value="5">
+
+                <button id="update">Update Simulation</button>
+                <button id="send">Send Data</button>
+
+                <p id="status" style="text-align:center; font-weight:bold; color:#007bff;"></p>
+
+            </div>
+            <div id="canvas-container"></div>
+        </section>
+
+        <section id="learn" class="section">
+    <h2>Learn About Network Topologies</h2>
+    <div class="topology-cards">
+
+        <div class="card" data-topology="bus">
+            <h3>Bus Topology</h3>
+            <div class="icon" id="bus-icon"></div>
+            <p><strong>Definition:</strong> All devices are connected to a single cable (the bus).</p>
+            <p><strong>Advantages:</strong> Easy to install, cost-effective.</p>
+            <p><strong>Disadvantages:</strong> Single point of failure, limited scalability.</p>
+            <p><strong>Examples:</strong> Early Ethernet networks.</p>
+            <div class="buttons">
+        <a href="https://youtu.be/HvAicKQEHlg" class="btn" target="_blank">Watch Tutorial</a>
+        <a href="https://drive.google.com/file/d/1EUK6MmrSrVEfuo78XKZupICq-aGp6ESn/view?usp=sharing" class="btn download" target="_blank">Download PKT</a>
+    </div>
+        </div>
+
+        <div class="card" data-topology="star">
+            <h3>Star Topology</h3>
+            <div class="icon" id="star-icon"></div>
+            <p><strong>Definition:</strong> All devices connect to a central hub or switch.</p>
+            <p><strong>Advantages:</strong> Easy to manage, fault isolation.</p>
+            <p><strong>Disadvantages:</strong> Central point failure affects all, more cabling.</p>
+            <p><strong>Examples:</strong> Modern LANs, home networks.</p>
+             <div class="buttons">
+        <a href="https://youtu.be/3qvzIomGgKE" class="btn" target="_blank">Watch Tutorial</a>
+        <a href="https://drive.google.com/file/d/1o_a7v6NWZ-QbSmBHKE2qehxu-FF-eWsi/view?usp=sharing" class="btn download" target="_blank">Download PKT</a>
+    </div>
+        </div>
+
+        <div class="card" data-topology="ring">
+            <h3>Ring Topology</h3>
+            <div class="icon" id="ring-icon"></div>
+            <p><strong>Definition:</strong> Devices form a closed loop, data travels in one direction.</p>
+            <p><strong>Advantages:</strong> Equal access, simple data flow.</p>
+            <p><strong>Disadvantages:</strong> Single failure breaks the ring, hard to add devices.</p>
+            <p><strong>Examples:</strong> Token Ring networks.</p>
+             <div class="buttons">
+        <a href="https://youtu.be/5Tc8K9wcA8M" class="btn" target="_blank">Watch Tutorial</a>
+        <a href="https://drive.google.com/file/d/1ztuNqY49Bz90qb5vHVIU87icDbJ12gRi/view?usp=sharing" class="btn download" target="_blank">Download PKT</a>
+    </div>
+        </div>
+
+        <div class="card" data-topology="mesh">
+            <h3>Mesh Topology</h3>
+            <div class="icon" id="mesh-icon"></div>
+            <p><strong>Definition:</strong> Every device connects to every other device.</p>
+            <p><strong>Advantages:</strong> Highly reliable, multiple paths.</p>
+            <p><strong>Disadvantages:</strong> Expensive, complex wiring.</p>
+            <p><strong>Examples:</strong> Wireless mesh networks, internet backbone.</p>
+            <div class="buttons">
+        <a href="https://youtu.be/mdahPOrn7is" class="btn" target="_blank">Watch Tutorial</a>
+        <a href="https://drive.google.com/file/d/1IKGOTsQboBUAp9--jFc8iZHbB2NWPaJd/view?usp=sharing" class="btn download" target="_blank">Download PKT</a>
+    </div>
+        </div>
+
+    </div>
+</section>
+
+
+        <section id="comparison" class="section">
+            <h2>Topology Comparison</h2>
+            <div class="chart">
+                <div class="category">
+                    <h3>Performance</h3>
+                    <div class="bars">
+                        <div class="bar bus" data-value="6"><span>Bus</span><div class="bar-fill"></div></div>
+                        <div class="bar star" data-value="8"><span>Star</span><div class="bar-fill"></div></div>
+                        <div class="bar ring" data-value="5"><span>Ring</span><div class="bar-fill"></div></div>
+                        <div class="bar mesh" data-value="9"><span>Mesh</span><div class="bar-fill"></div></div>
+                        <div class="bar hybrid" data-value="7"><span>Hybrid</span><div class="bar-fill"></div></div>
+                    </div>
+                </div>
+                <div class="category">
+                    <h3>Cost</h3>
+                    <div class="bars">
+                        <div class="bar bus" data-value="9"><span>Bus</span><div class="bar-fill"></div></div>
+                        <div class="bar star" data-value="7"><span>Star</span><div class="bar-fill"></div></div>
+                        <div class="bar ring" data-value="8"><span>Ring</span><div class="bar-fill"></div></div>
+                        <div class="bar mesh" data-value="4"><span>Mesh</span><div class="bar-fill"></div></div>
+                        <div class="bar hybrid" data-value="6"><span>Hybrid</span><div class="bar-fill"></div></div>
+                    </div>
+                </div>
+                <div class="category">
+                    <h3>Reliability</h3>
+                    <div class="bars">
+                        <div class="bar bus" data-value="4"><span>Bus</span><div class="bar-fill"></div></div>
+                        <div class="bar star" data-value="7"><span>Star</span><div class="bar-fill"></div></div>
+                        <div class="bar ring" data-value="5"><span>Ring</span><div class="bar-fill"></div></div>
+                        <div class="bar mesh" data-value="9"><span>Mesh</span><div class="bar-fill"></div></div>
+                        <div class="bar hybrid" data-value="8"><span>Hybrid</span><div class="bar-fill"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- <section class="simulation">
+  <h2>Topology Simulation</h2>
+
+  <div class="controls">
+    <label for="topoSelect">Select Topology:</label>
+    <select id="topoSelect">
+      <option value="star">Star</option>
+      <option value="bus">Bus</option>
+      <option value="ring">Ring</option>
+      <option value="mesh">Mesh</option>
+    </select>
+
+    <label for="nodeSlider">Nodes: <span id="nodeValue">5</span></label>
+    <input type="range" id="nodeSlider" min="2" max="20" value="5">
+
+    <button class="sim-btn" onclick="updatePerformance()">Update Performance</button>
+  </div>
+
+  PERFORMANCE RESULTS BOX -->
+  <!-- <div class="performance-box">
+    <h3>📊 Performance Comparison</h3>
+
+    <p><strong>Latency:</strong> <span id="latency">0</span> ms</p>
+    <p><strong>Data Speed:</strong> <span id="speed">0</span> Mbps</p>
+    <p><strong>Network Load:</strong> <span id="load">0</span>%</p>
+    <p><strong>Packet Drop:</strong> <span id="packet">0</span>%</p>
+  </div>
+
+</section> -->
+
+
+    <footer>
+        <p>&copy; 2025 NetSim Learn. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
